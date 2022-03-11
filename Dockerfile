@@ -3,3 +3,4 @@ RUN         yum install httpd -y
 LABEL       env=dev \
             department=it \
             infra=aws
+EXPOSE      80/TCP
