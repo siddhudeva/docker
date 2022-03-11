@@ -1,0 +1,23 @@
+---
+- hosts: any
+  become: yes
+  tasks:
+    - name: upgrade all packages
+      ansible.builtin.yum:
+         name: '*'
+         state: lates
+
+    - name: install java
+      yum:
+        name: openjdk-11-jdk
+        state: present
+    - name: adding nexus user
+      user:
+        name: sonar
+
+    - name: downloading sonarqube
+      unarchive:
+        src: https://download.sonatype.com/nexus/3/latest-unix.tar.gz
+        dest: /opt
+        remote_src: yes
+      run_as_user: nexus
