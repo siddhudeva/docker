@@ -9,7 +9,7 @@
 
     - name: install java
       yum:
-        name: java
+        name: java-11-openjdk
         state: present
 
     - name: adding nexus user
