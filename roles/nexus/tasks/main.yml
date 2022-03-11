@@ -23,7 +23,7 @@
   ansible.builtin.file:
     path: /opt/nexus-3.38.0-01
     state: directory
-  become_user: nexus
+#  become_user: nexus
 - name: changing dir permissions
   shell: |
     chown nexus:nexus /opt/nexus-3.38.0-01/
