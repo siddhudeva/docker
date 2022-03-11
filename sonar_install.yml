@@ -1,5 +1,6 @@
-- hosts: any
-  become: yes
+- name: Demo on simple playbook
+  hosts: localhost
+  connection: local
   tasks:
     - name: upgrade all packages
       yum:
