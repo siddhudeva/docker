@@ -35,26 +35,31 @@
   template:
     src: nexus.vmoptions
     dest: /opt/nexus/bin/nexus.vmoptions
+  become_user: nexus
 
 - name: file adding nexus.rc
   template:
     src: nexus.rc
     dest: /opt/nexus/bin/nexus.rc
+  become_user: nexus
 
 - name: file adding nexus.rc
   template:
     src: nexus-default.properties
     dest: /opt/nexus/etc/nexus-default.properties
+  become_user: nexus
 
 - name: file adding nexus.rc
   template:
     src: limits.conf
     dest: /etc/security/limits.conf
+  become_user: nexus
 
 - name: file adding nexus.rc
   copy:
     src: nexus.service
     dest: /etc/systemd/system/nexus.service
+  become_user: nexus
 
 - name: starting nexus services
   ansible.builtin.systemd:
