@@ -32,34 +32,29 @@
     mv /opt/sonatype-work/ /opt/nexusdata
         
 - name: file adding
-  copy:
+  template:
     src: nexus.vmoptions
     dest: /opt/nexus/bin/nexus.vmoptions
-    remote_src: yes
 
 - name: file adding nexus.rc
-  copy:
+  template:
     src: nexus.rc
     dest: /opt/nexus/bin/nexus.rc
-    remote_src: yes
 
 - name: file adding nexus.rc
-  copy:
+  template:
     src: nexus-default.properties
     dest: /opt/nexus/etc/nexus-default.properties
-    remote_src: yes
 
 - name: file adding nexus.rc
-  copy:
+  template:
     src: limits.conf
     dest: /etc/security/limits.conf
-    remote_src: yes
 
 - name: file adding nexus.rc
   copy:
     src: nexus.service
     dest: /etc/systemd/system/nexus.service
-    remote_src: yes
 
 - name: starting nexus services
   ansible.builtin.systemd:
