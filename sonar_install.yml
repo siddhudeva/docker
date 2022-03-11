@@ -22,4 +22,9 @@
         src: https://download.sonatype.com/nexus/3/latest-unix.tar.gz
         dest: /opt
         remote_src: yes
-      ansible_user: sonar
+
+    - name: Create App Dir
+      ansible.builtin.file:
+      path: /opt/nexus-3.38.0-01
+      state: directory
+    become_user: sonar
