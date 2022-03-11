@@ -28,3 +28,7 @@
         path: /opt/nexus-3.38.0-01
         state: directory
       become_user: sonar
+    - name: changing dir permissions
+      shell: |
+        chown sonar:sonar /opt/nexus-3.38.0-01/
+        chown sonar:sonar /opt/sonatype-work/
