@@ -17,7 +17,7 @@
         state: present
 
     - name: downloading sonarqube
-      unarchive:
+      ansible.builtin.unarchive:
         src: https://download.sonatype.com/nexus/3/latest-unix.tar.gz
         dest: /opt
         remote_src: yes
