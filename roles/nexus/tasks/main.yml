@@ -26,12 +26,12 @@
 #  become_user: nexus
 - name: making nexus as owner1
   file:
-    path: /sonatype-work/
+    path: /sonatype-work
     owner: nexus
 
 - name: making nexus as owner2
   file:
-    path: /opt/nexus-3.38.0-01/
+    path: /opt/nexus-3.38.0-01
     owner: nexus
 
 - name: changing dir permissions
