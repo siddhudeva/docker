@@ -24,23 +24,24 @@
     path: /opt/nexus-3.38.0-01
     state: directory
 #  become_user: nexus
-- name: remove old content
-  file:
-    path: /opt/sonar
-    state: absent
-- name: removing old content 2
-  file:
-    path: /opt/sonatype-work
-    state: absent
-
-
 
 - name: changing dir permissions
   shell: |
-    chown nexus:nexus /opt/nexus-3.38.0-01/
-    chown nexus:nexus /opt/sonatype-work/
-#    mv /opt/nexus-3.38.0-01/ /opt/nexus
-#    mv /opt/sonatype-work/ /opt/nexusdata
+#    chown nexus:nexus /opt/nexus-3.38.0-01/
+#    chown nexus:nexus /opt/sonatype-work/
+    mv /opt/nexus-3.38.0-01/ /opt/nexus
+    mv /opt/sonatype-work/ /opt/nexusdata
+
+- name: making nexus as owner1
+  file:
+    path: /opt/sonar
+    owner: nexus
+
+- name: making nexus as owner2
+  file:
+    path: /opt/sonatype-work
+    owner: nexus
+
 - name: Create App Dir
   ansible.builtin.file:
     path: /opt/nexus
