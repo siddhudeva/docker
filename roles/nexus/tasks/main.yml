@@ -18,73 +18,75 @@
     src: https://download.sonatype.com/nexus/3/latest-unix.tar.gz
     dest: /opt
     remote_src: yes
-
-- name: Create App Dir
-  ansible.builtin.file:
-    path: /opt/nexus-3.38.0-01
-    state: directory
+    owner: nexus
+#
+#- name: Create App Dir
+#  ansible.builtin.file:
+#    path: /opt/nexus-3.38.0-01
+#    state: directory
+##  become_user: nexus
+#- name: making nexus as owner1
+#  file:
+#    path: /sonatype-work
+#    owner: nexus
+#
+#- name: making nexus as owner2
+#  file:
+#    path: /opt/nexus-3.38.0-01
+#    owner: nexus
+#
+#- name: changing dir permissions
+#  shell: |
+#    mv /opt/nexus-3.38.0-01/ /opt/nexus
+#    mv /opt/sonatype-work/ /opt/nexusdata
+#
+#- name: Create App Dir
+#  ansible.builtin.file:
+#    path: /opt/nexus
+#    state: directory
+#
+#
+#- name: Create App Dir
+#  ansible.builtin.file:
+#    path: /opt/sonatype-work
+#    state: directory
 #  become_user: nexus
-- name: making nexus as owner1
-  file:
-    path: /sonatype-work
-    owner: nexus
-
-- name: making nexus as owner2
-  file:
-    path: /opt/nexus-3.38.0-01
-    owner: nexus
-
-- name: changing dir permissions
-  shell: |
-    mv /opt/nexus-3.38.0-01/ /opt/nexus
-    mv /opt/sonatype-work/ /opt/nexusdata
-
-
-- name: Create App Dir
-  ansible.builtin.file:
-    path: /opt/nexus
-    state: directory
-
-- name: Create App Dir
-  ansible.builtin.file:
-    path: /opt/sonatype-work
-    state: directory
-  become_user: nexus
-- name: file adding
-  template:
-    src: nexus.vmoptions
-    dest: /opt/nexus/bin/nexus.vmoptions
-  become_user: nexus
-
-- name: file adding nexus.rc
-  template:
-    src: nexus.rc
-    dest: /opt/nexus/bin/nexus.rc
-  become_user: nexus
-
-- name: file adding nexus.rc
-  template:
-    src: nexus-default.properties
-    dest: /opt/nexus/etc/nexus-default.properties
-  become_user: nexus
-
-- name: file adding nexus.rc
-  template:
-    src: limits.conf
-    dest: /etc/security/limits.conf
-  become_user: nexus
-
-- name: file adding nexus.rc
-  copy:
-    src: nexus.service
-    dest: /etc/systemd/system/nexus.service
-  become_user: nexus
-
-- name: starting nexus services
-  ansible.builtin.systemd:
-    daemon_reload: yes
-    state: restarted
-    name: nexus.service
+#
+#- name: file adding
+#  template:
+#    src: nexus.vmoptions
+#    dest: /opt/nexus/bin/nexus.vmoptions
+#  become_user: nexus
+#
+#- name: file adding nexus.rc
+#  template:
+#    src: nexus.rc
+#    dest: /opt/nexus/bin/nexus.rc
+#  become_user: nexus
+#
+#- name: file adding nexus.rc
+#  template:
+#    src: nexus-default.properties
+#    dest: /opt/nexus/etc/nexus-default.properties
+#  become_user: nexus
+#
+#- name: file adding nexus.rc
+#  template:
+#    src: limits.conf
+#    dest: /etc/security/limits.conf
+#  become_user: nexus
+#
+#- name: file adding nexus.rc
+#  copy:
+#    src: nexus.service
+#    dest: /etc/systemd/system/nexus.service
+#  become_user: nexus
+#
+#- name: starting nexus services
+#  ansible.builtin.systemd:
+#    daemon_reload: yes
+#    state: restarted
+#    name: nexus.service
 
 
 #    chown nexus:nexus /opt/nexus-3.38.0-01/
