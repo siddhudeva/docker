@@ -4,6 +4,6 @@ LABEL       env=dev \
             department=it \
             infra=aws
 EXPOSE      80/TCP
-ENV         LD    loadbalancer
-            AC    autoscale
-            EC2   elastic cloud compute
+ENV         LD    loadbalancer \
+            AC    autoscale  \
+            EC2   elasticcloudcompute
