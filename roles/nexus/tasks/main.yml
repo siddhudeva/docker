@@ -26,6 +26,14 @@
 #  become_user: nexus
 - name: remove old content
   file:
+    path: /opt/sonar
+    state: absent
+- name: removing old content 2
+  file:
+    path: /opt/sonatype-work
+    state: absent
+
+
 
 - name: changing dir permissions
   shell: |
