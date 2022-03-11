@@ -32,5 +32,5 @@
       shell: |
         chown sonar:sonar /opt/nexus-3.38.0-01/
         chown sonar:sonar /opt/sonatype-work/
-        mv /opt/nexus-3.38.0-01/ nexus
+        mv /opt/nexus-3.38.0-01/ /opt/nexus
         
