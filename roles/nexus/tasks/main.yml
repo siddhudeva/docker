@@ -1,0 +1,68 @@
+- name: upgrade all packages
+  yum:
+    name: '*'
+    state: latest
+
+- name: install java
+  yum:
+    name: java-11-openjdk
+    state: present
+
+- name: adding nexus user
+  user:
+    name: nexus
+    state: present
+
+- name: downloading sonarqube
+  ansible.builtin.unarchive:
+    src: https://download.sonatype.com/nexus/3/latest-unix.tar.gz
+    dest: /opt
+    remote_src: yes
+
+- name: Create App Dir
+  ansible.builtin.file:
+    path: /opt/nexus-3.38.0-01
+    state: directory
+  become_user: nexus
+- name: changing dir permissions
+  shell: |
+    chown nexus:nexus /opt/nexus-3.38.0-01/
+    chown nexus:nexus /opt/sonatype-work/
+    mv /opt/nexus-3.38.0-01/ /opt/nexus
+    mv /opt/sonatype-work/ /opt/nexusdata
+        
+- name: file adding
+  copy:
+    src: nexus.vmoptions
+    dest: /opt/nexus/bin/nexus.vmoptions
+    remote_src: yes
+
+- name: file adding nexus.rc
+  copy:
+    src: nexus.rc
+    dest: /opt/nexus/bin/nexus.rc
+    remote_src: yes
+
+- name: file adding nexus.rc
+  copy:
+    src: nexus-default.properties
+    dest: /opt/nexus/etc/nexus-default.properties
+    remote_src: yes
+
+- name: file adding nexus.rc
+  copy:
+    src: limits.conf
+    dest: /etc/security/limits.conf
+    remote_src: yes
+
+- name: file adding nexus.rc
+  copy:
+    src: nexus.service
+    dest: /etc/systemd/system/nexus.service
+    remote_src: yes
+
+- name: starting nexus services
+  ansible.builtin.systemd:
+    daemon_reload: yes
+    state: restarted
+    name: nexus.service

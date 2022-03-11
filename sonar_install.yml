@@ -1,37 +1,5 @@
 - name: Demo on simple playbook
   hosts: localhost
   connection: local
-  tasks:
-    - name: upgrade all packages
-      yum:
-         name: '*'
-         state: latest
-
-    - name: install java
-      yum:
-        name: java-11-openjdk
-        state: present
-
-    - name: adding nexus user
-      user:
-        name: sonar
-        state: present
-
-    - name: downloading sonarqube
-      ansible.builtin.unarchive:
-        src: https://download.sonatype.com/nexus/3/latest-unix.tar.gz
-        dest: /opt
-        remote_src: yes
-
-    - name: Create App Dir
-      ansible.builtin.file:
-        path: /opt/nexus-3.38.0-01
-        state: directory
-      become_user: sonar
-    - name: changing dir permissions
-      shell: |
-        chown sonar:sonar /opt/nexus-3.38.0-01/
-        chown sonar:sonar /opt/sonatype-work/
-        mv /opt/nexus-3.38.0-01/ /opt/nexus
-        mv /opt/sonatype-work/ /opt/nexusdata
-        
+  roles:
+    - nexus
