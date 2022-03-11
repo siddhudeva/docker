@@ -36,8 +36,6 @@
 
 - name: changing dir permissions
   shell: |
-#    chown nexus:nexus /opt/nexus-3.38.0-01/
-#    chown nexus:nexus /opt/sonatype-work/
     mv /opt/nexus-3.38.0-01/ /opt/nexus
     mv /opt/sonatype-work/ /opt/nexusdata
 
@@ -87,3 +85,7 @@
     daemon_reload: yes
     state: restarted
     name: nexus.service
+
+
+#    chown nexus:nexus /opt/nexus-3.38.0-01/
+#    chown nexus:nexus /opt/sonatype-work/
