@@ -24,13 +24,25 @@
     path: /opt/nexus-3.38.0-01
     state: directory
 #  become_user: nexus
+- name: remove old content
+  file:
+
 - name: changing dir permissions
   shell: |
     chown nexus:nexus /opt/nexus-3.38.0-01/
     chown nexus:nexus /opt/sonatype-work/
-    mv /opt/nexus-3.38.0-01/ /opt/nexus
-    mv /opt/sonatype-work/ /opt/nexusdata
-        
+#    mv /opt/nexus-3.38.0-01/ /opt/nexus
+#    mv /opt/sonatype-work/ /opt/nexusdata
+- name: Create App Dir
+  ansible.builtin.file:
+    path: /opt/nexus
+    state: directory
+
+- name: Create App Dir
+  ansible.builtin.file:
+    path: /opt/sonatype-work
+    state: directory
+  become_user: nexus
 - name: file adding
   template:
     src: nexus.vmoptions
