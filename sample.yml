@@ -1,5 +1,6 @@
 - name: Demo on simple playbook
-  hosts: all
+  hosts: localhost
+  connection: local
   tasks:
     - name: Task1
       ansible.builtin.debug:
