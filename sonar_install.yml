@@ -1,9 +1,8 @@
----
 - hosts: any
   become: yes
   tasks:
     - name: upgrade all packages
-      ansible.builtin.yum:
+      yum:
          name: '*'
          state: lates
 
@@ -11,9 +10,11 @@
       yum:
         name: openjdk-11-jdk
         state: present
+
     - name: adding nexus user
       user:
         name: sonar
+        state: present
 
     - name: downloading sonarqube
       unarchive:
